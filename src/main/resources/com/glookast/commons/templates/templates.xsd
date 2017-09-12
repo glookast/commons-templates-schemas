@@ -6,39 +6,105 @@
            targetNamespace="http://templates.commons.glookast.com">
     <xs:import namespace="http://base.commons.glookast.com" schemaLocation="../base/base.xsd" />
 
-    <xs:simpleType name="StorageSystemType">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="GENERIC" />
-            <xs:enumeration value="AVID" />
-        </xs:restriction>
-    </xs:simpleType>
 
-    <xs:complexType name="StorageSystem">
+
+    <xs:complexType name="StorageSystem" abstract="true">
         <xs:sequence>
             <xs:element name="id" type="base:UUID" minOccurs="1" maxOccurs="1" />
             <xs:element name="name" type="xs:string" minOccurs="1" maxOccurs="1" />
             <xs:element name="description" type="xs:string" minOccurs="1" maxOccurs="1" />
-            <xs:element name="type" type="tns:StorageSystemType" minOccurs="1" maxOccurs="1" />
-            <xs:element name="location" type="xs:string" minOccurs="1" maxOccurs="1" />
         </xs:sequence>
     </xs:complexType>
 
-    <xs:simpleType name="MetadataSystemType">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="EXPORT_XML" />
-            <xs:enumeration value="EXPORT_AAF" />
-            <xs:enumeration value="INTERPLAY" />
-        </xs:restriction>
-    </xs:simpleType>
+    <xs:complexType name="GenericStorageSystem">
+        <xs:complexContent>
+            <xs:extension base="tns:StorageSystem">
+                <xs:sequence>
+                    <xs:element name="location" type="xs:string" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 
-    <xs:complexType name="MetadataSystem">
+    <xs:complexType name="AvidStorageSystem" abstract="true">
+        <xs:complexContent>
+            <xs:extension base="tns:StorageSystem" />
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="AvidNexusStorageSystem">
+        <xs:complexContent>
+            <xs:extension base="tns:AvidStorageSystem">
+                <xs:sequence>
+                    <xs:element name="systemDirector" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="workspace" type="xs:string" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="AvidMediaNetworkStorageSystem">
+        <xs:complexContent>
+            <xs:extension base="tns:AvidStorageSystem">
+                <xs:sequence>
+                    <xs:element name="fileManager" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="workspace" type="xs:string" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="AvidOtherStorageSystem">
+        <xs:complexContent>
+            <xs:extension base="tns:AvidStorageSystem">
+                <xs:sequence>
+                    <xs:element name="location" type="xs:string" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="MetadataSystem" abstract="true">
         <xs:sequence>
             <xs:element name="id" type="base:UUID" minOccurs="1" maxOccurs="1" />
             <xs:element name="name" type="xs:string" minOccurs="1" maxOccurs="1" />
             <xs:element name="description" type="xs:string" minOccurs="1" maxOccurs="1" />
-            <xs:element name="type" type="tns:MetadataSystemType" minOccurs="1" maxOccurs="1" />
-            <xs:element name="properties" type="base:PropertyList" minOccurs="1" maxOccurs="1" />
         </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="XmlExportMetadataSystem">
+        <xs:complexContent>
+            <xs:extension base="tns:MetadataSystem">
+                <xs:sequence>
+                    <xs:element name="location" type="xs:string" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="AvidAafExportMetadataSystem">
+        <xs:complexContent>
+            <xs:extension base="tns:MetadataSystem">
+                <xs:sequence>
+                    <xs:element name="location" type="xs:string" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="AvidInterplayMetadataSystem">
+        <xs:complexContent>
+            <xs:extension base="tns:MetadataSystem">
+                <xs:sequence>
+                    <xs:element name="hostname" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="port" type="xs:unsignedShort" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="workgroup" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="username" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="password" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="folder" type="xs:string" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
 
     <xs:complexType name="OutputSystem">
@@ -48,6 +114,21 @@
             <xs:element name="description" type="xs:string" minOccurs="1" maxOccurs="1" />
             <xs:element name="storageSystemId" type="base:UUID" minOccurs="1" maxOccurs="1" />
             <xs:element name="metadataSystemIds" type="base:UUID" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="SystemType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="GENERIC" />
+            <xs:enumeration value="AVID" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="ContainerFormat">
+        <xs:sequence>
+            <xs:element name="id" type="base:UUID" minOccurs="1" maxOccurs="1" />
+            <xs:element name="name" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="systemTypes" type="tns:SystemType" minOccurs="0" maxOccurs="unbounded" />
         </xs:sequence>
     </xs:complexType>
 
@@ -86,13 +167,6 @@
         </xs:sequence>
     </xs:complexType>
 
-    <xs:complexType name="ContainerFormat">
-        <xs:sequence>
-            <xs:element name="id" type="base:UUID" minOccurs="1" maxOccurs="1" />
-            <xs:element name="name" type="xs:string" minOccurs="1" maxOccurs="1" />
-            <xs:element name="storageSystemTypes" type="tns:StorageSystemType" minOccurs="0" maxOccurs="unbounded" />
-        </xs:sequence>
-    </xs:complexType>
 
     <xs:complexType name="TransformProfile">
         <xs:sequence>
