@@ -32,7 +32,7 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:complexType name="AvidNexusStorageSystem">
+    <xs:complexType name="AvidNexisStorageSystem">
         <xs:complexContent>
             <xs:extension base="tns:AvidStorageSystem">
                 <xs:sequence>
