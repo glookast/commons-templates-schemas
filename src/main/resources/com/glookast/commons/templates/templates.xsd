@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://templates.commons.glookast.com"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:base="http://base.commons.glookast.com"
+           version="1.0"
+           targetNamespace="http://templates.commons.glookast.com">
+    <xs:import namespace="http://base.commons.glookast.com" schemaLocation="../base/base.xsd" />
+
+    <xs:simpleType name="StorageSystemType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="GENERIC" />
+            <xs:enumeration value="AVID" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="StorageSystem">
+        <xs:sequence>
+            <xs:element name="id" type="base:UUID" minOccurs="1" maxOccurs="1" />
+            <xs:element name="name" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="description" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="type" type="tns:StorageSystemType" minOccurs="1" maxOccurs="1" />
+            <xs:element name="location" type="xs:string" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="MetadataSystemType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="EXPORT_XML" />
+            <xs:enumeration value="EXPORT_AAF" />
+            <xs:enumeration value="INTERPLAY" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="MetadataSystem">
+        <xs:sequence>
+            <xs:element name="id" type="base:UUID" minOccurs="1" maxOccurs="1" />
+            <xs:element name="name" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="description" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="type" type="tns:MetadataSystemType" minOccurs="1" maxOccurs="1" />
+            <xs:element name="properties" type="base:PropertyList" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="OutputSystem">
+        <xs:sequence>
+            <xs:element name="id" type="base:UUID" minOccurs="1" maxOccurs="1" />
+            <xs:element name="name" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="description" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="storageSystemId" type="base:UUID" minOccurs="1" maxOccurs="1" />
+            <xs:element name="metadataSystemIds" type="base:UUID" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="VideoFormat">
+        <xs:sequence>
+            <xs:element name="id" type="base:UUID" minOccurs="1" maxOccurs="1" />
+            <xs:element name="codecName" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="codecVendor" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="codecVersion" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="codecFamily" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="displayWidth" type="xs:int" minOccurs="1" maxOccurs="1" />
+            <xs:element name="displayHeight" type="xs:int" minOccurs="1" maxOccurs="1" />
+            <xs:element name="frameRate" type="base:Rational" minOccurs="1" maxOccurs="1" />
+            <xs:element name="interlaced" type="xs:boolean" minOccurs="1" maxOccurs="1" />
+            <xs:element name="topFieldFirst" type="xs:boolean" minOccurs="1" maxOccurs="1" />
+            <xs:element name="aspectRatio" type="base:Rational" minOccurs="1" maxOccurs="1" />
+            <xs:element name="bitRate" type="xs:long" minOccurs="1" maxOccurs="1" />
+            <xs:element name="constantBitRate" type="xs:boolean" minOccurs="1" maxOccurs="1" />
+            <xs:element name="containerFormatIds" type="base:UUID" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AudioFormat">
+        <xs:sequence>
+            <xs:element name="id" type="base:UUID" minOccurs="1" maxOccurs="1" />
+            <xs:element name="codecName" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="codecVendor" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="codecVersion" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="codecFamily" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="channels" type="xs:int" minOccurs="1" maxOccurs="1" />
+            <xs:element name="sampleSize" type="xs:int" minOccurs="1" maxOccurs="1" />
+            <xs:element name="samplingRate" type="xs:int" minOccurs="1" maxOccurs="1" />
+            <xs:element name="bitRate" type="xs:long" minOccurs="1" maxOccurs="1" />
+            <xs:element name="constantBitRate" type="xs:boolean" minOccurs="1" maxOccurs="1" />
+            <xs:element name="containerFormatIds" type="base:UUID" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ContainerFormat">
+        <xs:sequence>
+            <xs:element name="id" type="base:UUID" minOccurs="1" maxOccurs="1" />
+            <xs:element name="name" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="storageSystemTypes" type="tns:StorageSystemType" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="TransformProfile">
+        <xs:sequence>
+            <xs:element name="id" type="base:UUID" minOccurs="1" maxOccurs="1" />
+            <xs:element name="name" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="description" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="videoFormatId" type="base:UUID" minOccurs="1" maxOccurs="1" />
+            <xs:element name="audioFormatId" type="base:UUID" minOccurs="1" maxOccurs="1" />
+            <xs:element name="containerFormatId" type="base:UUID" minOccurs="1" maxOccurs="1" />
+            <xs:element name="outputSystemIds" type="base:UUID" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Template">
+        <xs:sequence>
+            <xs:element name="id" type="base:UUID" minOccurs="1" maxOccurs="1" />
+            <xs:element name="name" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="description" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="transformProfileIds" type="base:UUID" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>
