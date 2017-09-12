@@ -6,7 +6,18 @@
            targetNamespace="http://templates.commons.glookast.com">
     <xs:import namespace="http://base.commons.glookast.com" schemaLocation="../base/base.xsd" />
 
-
+    <xs:simpleType name="TestResultProperty">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="STORAGE_PATH_EXISTS" />
+            <xs:enumeration value="STORAGE_PATH_IS_FOLDER" />
+            <xs:enumeration value="STORAGE_PATH_CAN_READ" />
+            <xs:enumeration value="STORAGE_PATH_CAN_WRITE" />
+            <xs:enumeration value="STORAGE_PATH_CAN_EXECUTE" />
+            <xs:enumeration value="INTERPLAY_REACHABLE" />
+            <xs:enumeration value="INTERPLAY_ROOT_FOLDER_EXISTS" />
+            <xs:enumeration value="INTERPLAY_FOLDER_EXISTS" />
+        </xs:restriction>
+    </xs:simpleType>
 
     <xs:complexType name="StorageSystem" abstract="true">
         <xs:sequence>
