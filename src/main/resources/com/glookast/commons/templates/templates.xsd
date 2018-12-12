@@ -8,6 +8,8 @@
 
     <xs:simpleType name="TestResultProperty">
         <xs:restriction base="xs:string">
+            <xs:enumeration value="STORAGE_CONNECTION_OK" />
+            <xs:enumeration value="STORAGE_AUTHENTICATION_OK" />
             <xs:enumeration value="STORAGE_PATH_EXISTS" />
             <xs:enumeration value="STORAGE_PATH_IS_FOLDER" />
             <xs:enumeration value="STORAGE_PATH_CAN_READ" />
@@ -75,6 +77,20 @@
         </xs:complexContent>
     </xs:complexType>
 
+    <xs:complexType name="FtpStorageSystem">
+        <xs:complexContent>
+            <xs:extension base="tns:StorageSystem">
+                <xs:sequence>
+                    <xs:element name="hostname" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="port" type="xs:unsignedShort" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="folder" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="username" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="password" type="xs:string" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
     <xs:complexType name="MetadataSystem" abstract="true">
         <xs:sequence>
             <xs:element name="id" type="base:UUID" minOccurs="1" maxOccurs="1" />
@@ -132,6 +148,7 @@
         <xs:restriction base="xs:string">
             <xs:enumeration value="GENERIC" />
             <xs:enumeration value="AVID" />
+            <xs:enumeration value="FTP" />
         </xs:restriction>
     </xs:simpleType>
 
