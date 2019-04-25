@@ -8,16 +8,17 @@
 
     <xs:simpleType name="TestResultProperty">
         <xs:restriction base="xs:string">
-            <xs:enumeration value="STORAGE_CONNECTION_OK" />
-            <xs:enumeration value="STORAGE_AUTHENTICATION_OK" />
-            <xs:enumeration value="STORAGE_PATH_EXISTS" />
-            <xs:enumeration value="STORAGE_PATH_IS_FOLDER" />
-            <xs:enumeration value="STORAGE_PATH_CAN_READ" />
-            <xs:enumeration value="STORAGE_PATH_CAN_WRITE" />
-            <xs:enumeration value="STORAGE_PATH_CAN_EXECUTE" />
-            <xs:enumeration value="INTERPLAY_REACHABLE" />
-            <xs:enumeration value="INTERPLAY_ROOT_FOLDER_EXISTS" />
-            <xs:enumeration value="INTERPLAY_FOLDER_EXISTS" />
+            <xs:enumeration value="STORAGE_SYSTEM_CONNECTION_OK" />
+            <xs:enumeration value="STORAGE_SYSTEM_AUTHENTICATION_OK" />
+            <xs:enumeration value="STORAGE_SYSTEM_PATH_EXISTS" />
+            <xs:enumeration value="STORAGE_SYSTEM_PATH_IS_FOLDER" />
+            <xs:enumeration value="STORAGE_SYSTEM_PATH_CAN_READ" />
+            <xs:enumeration value="STORAGE_SYSTEM_PATH_CAN_WRITE" />
+            <xs:enumeration value="STORAGE_SYSTEM_PATH_CAN_EXECUTE" />
+            <xs:enumeration value="METADATA_SYSTEM_CONNECTION_OK" />
+            <xs:enumeration value="METADATA_SYSTEM_AUTHENTICATION_OK" />
+            <xs:enumeration value="METADATA_SYSTEM_ROOT_FOLDER_EXISTS" />
+            <xs:enumeration value="METADATA_SYSTEM_FOLDER_EXISTS" />
         </xs:restriction>
     </xs:simpleType>
 
@@ -120,7 +121,7 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:complexType name="AvidInterplayMetadataSystem">
+    <xs:complexType name="AvidPamMetadataSystem">
         <xs:complexContent>
             <xs:extension base="tns:MetadataSystem">
                 <xs:sequence>
@@ -129,7 +130,26 @@
                     <xs:element name="workgroup" type="xs:string" minOccurs="1" maxOccurs="1" />
                     <xs:element name="username" type="xs:string" minOccurs="1" maxOccurs="1" />
                     <xs:element name="password" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="realm" type="xs:string" minOccurs="1" maxOccurs="1" />
                     <xs:element name="folder" type="xs:string" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="AvidMamMetadataSystem">
+        <xs:complexContent>
+            <xs:extension base="tns:MetadataSystem">
+                <xs:sequence>
+                    <xs:element name="hostname" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="port" type="xs:unsignedShort" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="ssl" type="xs:boolean" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="username" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="password" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="realm" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="applicationId" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="applicationSecret" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="folderGuid" type="xs:string" minOccurs="1" maxOccurs="1" />
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
