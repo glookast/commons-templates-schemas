@@ -40,6 +40,17 @@
         </xs:complexContent>
     </xs:complexType>
 
+    <xs:complexType name="ArvatoEditMateGenericStorageSystem">
+        <xs:complexContent>
+            <xs:extension base="tns:StorageSystem">
+                <xs:sequence>
+                    <xs:element name="location" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="VPMSStorageId" type="xs:string" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
     <xs:complexType name="AvidStorageSystem" abstract="true">
         <xs:complexContent>
             <xs:extension base="tns:StorageSystem" />
@@ -150,6 +161,28 @@
                     <xs:element name="applicationId" type="xs:string" minOccurs="1" maxOccurs="1" />
                     <xs:element name="applicationSecret" type="xs:string" minOccurs="1" maxOccurs="1" />
                     <xs:element name="folderGuid" type="xs:string" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="ArvatoEditMateMetadataSystem">
+        <xs:complexContent>
+            <xs:extension base="tns:MetadataSystem">
+                <xs:sequence>
+                    <xs:element name="hostname" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="port" type="xs:unsignedShort" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="ssl" type="xs:boolean" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="username" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="password" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="locatorTypeName" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="locatorNoteName" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="locatorColorName" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="restrictionTypeName" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="restrictionNoteName" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="restrictionColorName" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="metadataFieldsMap" type="xs:string" minOccurs="1" maxOccurs="1" />
+
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
