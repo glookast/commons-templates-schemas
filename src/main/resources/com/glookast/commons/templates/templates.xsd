@@ -45,6 +45,7 @@
             <xs:extension base="tns:StorageSystem">
                 <xs:sequence>
                     <xs:element name="location" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="option" type="xs:string" minOccurs="1" maxOccurs="1" />
                     <xs:element name="VPMSStorageId" type="xs:string" minOccurs="1" maxOccurs="1" />
                 </xs:sequence>
             </xs:extension>
