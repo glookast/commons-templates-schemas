@@ -122,6 +122,16 @@
         </xs:complexContent>
     </xs:complexType>
 
+    <xs:complexType name="JsonExportMetadataSystem">
+        <xs:complexContent>
+            <xs:extension base="tns:MetadataSystem">
+                <xs:sequence>
+                    <xs:element name="location" type="xs:string" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
     <xs:complexType name="AvidAafExportMetadataSystem">
         <xs:complexContent>
             <xs:extension base="tns:MetadataSystem">
