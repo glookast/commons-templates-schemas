@@ -52,6 +52,23 @@
         </xs:complexContent>
     </xs:complexType>
 
+    <xs:complexType name="EditShareFlowStorageSystem">
+        <xs:complexContent>
+            <xs:extension base="tns:StorageSystem">
+                <xs:sequence>
+                    <xs:element name="hostname" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="port" type="xs:int" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="ssl" type="xs:boolean" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="username" type="xs:string" minOccurs="0" maxOccurs="1" />
+                    <xs:element name="password" type="xs:string" minOccurs="0" maxOccurs="1" />
+                    <xs:element name="storageURL" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="mediaSpace" type="xs:string" minOccurs="1" maxOccurs="1" />
+                    <xs:element name="hasFlowProxy" type="xs:boolean" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
     <xs:complexType name="AvidStorageSystem" abstract="true">
         <xs:complexContent>
             <xs:extension base="tns:StorageSystem" />
