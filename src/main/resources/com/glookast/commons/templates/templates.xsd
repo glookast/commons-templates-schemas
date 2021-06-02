@@ -231,6 +231,7 @@
             <xs:enumeration value="GENERIC" />
             <xs:enumeration value="AVID" />
             <xs:enumeration value="FTP" />
+            <xs:enumeration value="EFS" />
         </xs:restriction>
     </xs:simpleType>
 
